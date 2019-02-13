@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.0)
 project (roguelike)
 
-SET (GCC_COMPILE_FLAGS "-std=c++11 -g -ggdb -O0 -pedantic")
+SET (GCC_COMPILE_FLAGS "-std=c++17 -g -ggdb -O0 -pedantic")
 SET (GCC_LINK_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lncurses")
 
 SET (CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COMPILE_FLAGS}" )

@@ -1,8 +1,6 @@
-add_subdirectory (window)
-
 SET (SOURCES
 	${SOURCES}
-	${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/curses.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/game.cpp
 	PARENT_SCOPE
 )
