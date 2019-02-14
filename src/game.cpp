@@ -1,6 +1,10 @@
 #include "game.h"
 
+#include <chrono>
+#include <thread>
+
 #include "window/game.h"
+
 
 Game::Game()
 {
@@ -19,9 +23,12 @@ Game::Game()
 
 int Game::run()
 {
-	mLevel->draw(mWin);
-	mPallette.activate();
-	mWin->render();
+	while (true) {
+		mLevel->draw(mWin);
+		mPallette.activate();
+		mWin->render();
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+	}
 }
 
 void Game::generateLevel()

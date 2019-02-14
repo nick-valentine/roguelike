@@ -21,7 +21,12 @@ namespace objects
 		);
 	}
 
-	TileType Tile::getType(uint i)
+	const TileType Tile::describe() const
+	{
+		return Tile::Tiles[mType];
+	}
+
+	const TileType Tile::getType(uint i)
 	{
 		return Tile::Tiles[i];
 	}

@@ -33,8 +33,9 @@ namespace objects
 		Tile(TileName type);
 
 		void drawAt(window::ptr &win, iPoint pos);
-		
-		static TileType getType(uint i);
+		const TileType describe() const;
+
+		static const TileType getType(uint i);
 	private:
 		static const std::array<TileType, 2> Tiles;
 

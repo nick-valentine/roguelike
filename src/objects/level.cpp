@@ -1,18 +1,12 @@
 #include "level.h"
 
-
-#include <iostream>
+#include <cmath>
 
 namespace objects 
 {
 	Level::Level(iPoint size) : mSize(size)
 	{
-		for (int i = 0; i < mSize.x; i++) {
-			mLand.push_back(std::vector<Tile>());
-			for (int j = 0; j < mSize.y; j++) {
-				mLand[i].push_back(Tile(TileName::Wall));
-			}
-		}
+		matrix::fill(mLand, mSize, Tile(TileName::Wall));
 	}
 
 	void Level::draw(window::ptr &win)
@@ -37,5 +31,20 @@ namespace objects
 	void Level::set(iPoint at, Tile t)
 	{
 		mLand[at.x][at.y] = t;
+	}
+
+	void Level::addRoom(iPoint p)
+	{
+		mRooms.push_back(p);
+	}
+
+	const std::vector<iPoint> &Level::rooms() const
+	{
+		return mRooms;
+	}
+
+	const Matrix<Tile> &Level::land() const
+	{
+		return mLand;
 	}
 }

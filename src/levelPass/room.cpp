@@ -15,6 +15,7 @@ namespace levelPass
 		for (int i = 0; i < mCount; ++i) {
 			auto rect = this->genBoundries(size);
 			this->clearRoom(l, rect);
+			l.addRoom(iPoint(rect.x + (rect.w/2), rect.y + (rect.h/2)));
 		}
 	}
 

@@ -7,6 +7,7 @@ namespace utility
 	class Point
 	{
 	public:
+		Point() = default;
 		Point(T x, T y);
 		T x;
 		T y;

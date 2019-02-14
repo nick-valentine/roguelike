@@ -3,6 +3,7 @@
 
 #include "abstract.h"
 #include "room.h"
+#include "hallway.h"
 
 namespace levelPass
 {

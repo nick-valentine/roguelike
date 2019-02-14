@@ -3,8 +3,10 @@
 
 #include <vector>
 #include <memory>
+#include <algorithm>
 
 #include "../utility/point.h"
+#include "../utility/matrix.h"
 #include "../window/abstract.h"
 
 #include "tile.h"
@@ -23,9 +25,14 @@ namespace objects
 		iPoint size();
 		Tile get(iPoint at);
 		void set(iPoint at, Tile t);
+		void addRoom(iPoint p);
+		const std::vector<iPoint> &rooms() const;
+
+		const Matrix<Tile> &land() const;
 	private:
 		iPoint mSize;
-		std::vector< std::vector< Tile > > mLand;
+		Matrix<Tile> mLand;
+		std::vector<iPoint> mRooms;
 	};
 }
 #endif // OBJECTS_LEVEL_H
