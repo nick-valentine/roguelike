@@ -2,7 +2,6 @@
 
 #include "../utility/route.h"
 
-#include <iostream>
 #include <thread>
 #include <future>
 #include <vector>
@@ -75,7 +74,6 @@ namespace levelPass
 		}
 
 		while (current != next) {
-			std::cout<<"("<<current.x<<","<<current.y<<")\n";
 			v.push_back(current);
 			if (current.x != next.x) {
 				current.x += sign.x;

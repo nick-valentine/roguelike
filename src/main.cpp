@@ -21,9 +21,6 @@ int main()
 
 	Game g;
 	auto returnVal = g.run();
-
-	std::this_thread::sleep_for(std::chrono::milliseconds(100000));
-
 	finish(returnVal);
 }
 
