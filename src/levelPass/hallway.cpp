@@ -27,7 +27,7 @@ namespace levelPass
 		for (int i = 0; i < l.rooms().size() - 1; ++i) {
 			std::packaged_task<
 				std::vector<iPoint>(objects::Level, const Matrix<objects::Tile>*, uint)
-			> task(std::bind(&Hallway::findNextPath, this, std::ref(l), &m, i));
+			> task(std::bind(&Hallway::lerp, this, std::ref(l), &m, i));
 
 			futures.push_back(task.get_future());
 
@@ -54,6 +54,39 @@ namespace levelPass
 
 		Route<objects::Tile> r(*m);
 		return r.find(current, next, [](objects::Tile t)->bool{return t.describe().collidable;});
+	}
+
+	std::vector<iPoint> Hallway::lerp(objects::Level &l, const Matrix<objects::Tile> *m, uint roomIDX)
+	{
+		std::vector<iPoint> v;
+		auto rooms = l.rooms();
+		if (roomIDX >= rooms.size()-1) {
+			return std::vector<iPoint>();
+		}
+		auto current = rooms[roomIDX];
+		auto next = rooms[roomIDX+1];
+
+		iPoint sign{1,1};
+		if (current.x > next.x) {
+			sign.x = -1;
+		}
+		if (current.y > next.y) {
+			sign.y = -1;
+		}
+
+		while (current != next) {
+			std::cout<<"("<<current.x<<","<<current.y<<")\n";
+			v.push_back(current);
+			if (current.x != next.x) {
+				current.x += sign.x;
+				continue;
+			}
+			if (current.y != next.y) {
+				current.y += sign.y;
+				continue;
+			}
+		}
+		return v;
 	}
 
 	void Hallway::open(objects::Level &l, iPoint k)

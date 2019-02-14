@@ -19,6 +19,7 @@ namespace levelPass
 		virtual void execute(objects::Level &l);
 	private:
 		std::vector<iPoint> findNextPath(objects::Level &l, const Matrix<objects::Tile> *m, uint roomIDX);
+		std::vector<iPoint> lerp(objects::Level &l, const Matrix<objects::Tile> *m, uint roomIDX);
 		void open(objects::Level &l, iPoint p);
 
 		iPoint mSize;

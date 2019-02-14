@@ -18,6 +18,18 @@ namespace utility
 	{
 	}
 
+	template <typename T>
+	bool operator==(const Point<T> &a, const Point<T> &b) 
+	{
+		return a.x == b.x && a.y == b.y;
+	}
+
+	template <typename T>
+	bool operator!=(const Point<T> &a, const Point<T> &b) 
+	{
+		return !(a==b);
+	}
+
 	using iPoint = Point<int>;
 }
 
