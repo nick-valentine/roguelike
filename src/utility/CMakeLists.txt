@@ -1,0 +1,5 @@
+SET (SOURCES
+	${SOURCES}
+	${CMAKE_CURRENT_SOURCE_DIR}/colorPallette.cpp
+	PARENT_SCOPE
+)

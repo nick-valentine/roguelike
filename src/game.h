@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "window/abstract.h"
+#include "objects/level.h"
 
 class Game
 {
@@ -13,10 +14,12 @@ public:
 
 	int run();
 private:
-	std::unique_ptr<window::Abstract> mWin = nullptr;
+	window::ptr mWin = nullptr;
 
-	int mScreenHeight = 0;
-	int mScreenWidth = 0;
+	ColorPallette mPallette;
+	std::unique_ptr<objects::Level> mLevel;
+
+	iPoint mScreenDims = iPoint(0,0);
 };
 
 #endif //GAME_H

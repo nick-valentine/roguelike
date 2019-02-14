@@ -68,12 +68,14 @@ namespace window
 	{
 		uint lastColorPair = 1;
 		wattrset(mWin, COLOR_PAIR(1));
+		attron(COLOR_PAIR(1));
 		wmove(mWin, 0, 0);
 		int rowCount = 0;
 		for (auto &i : mScreenBuffer) {
 			for (auto &j : i) {
 				if (j.colorPair != lastColorPair) {
 					wattrset(mWin, COLOR_PAIR(j.colorPair));
+					attron(COLOR_PAIR(j.colorPair));
 					lastColorPair = j.colorPair;
 				}
 				waddch(mWin, j.c);

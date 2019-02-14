@@ -2,6 +2,7 @@
 #define WINDOW_ABSTRACT_H
 
 #include <string>
+#include <memory>
 
 #include "../utility/point.h"
 #include "utility.h"
@@ -28,6 +29,8 @@ namespace window {
 		virtual iPoint pos() = 0;
 		virtual iPoint size() = 0;
 	};
+
+	using ptr = std::unique_ptr<Abstract>;
 }
 
 #endif // WINDOW_ABSTRACT_H

@@ -1,4 +1,6 @@
 add_subdirectory (window)
+add_subdirectory (objects)
+add_subdirectory (utility)
 
 SET (SOURCES
 	${SOURCES}
