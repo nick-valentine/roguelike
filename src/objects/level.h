@@ -19,6 +19,10 @@ namespace objects
 		Level(iPoint size);
 
 		void draw(window::ptr &win);
+
+		iPoint size();
+		Tile get(iPoint at);
+		void set(iPoint at, Tile t);
 	private:
 		iPoint mSize;
 		std::vector< std::vector< Tile > > mLand;

@@ -1,6 +1,7 @@
 add_subdirectory (window)
 add_subdirectory (objects)
 add_subdirectory (utility)
+add_subdirectory (levelPass)
 
 SET (SOURCES
 	${SOURCES}

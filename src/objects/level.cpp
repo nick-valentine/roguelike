@@ -23,4 +23,19 @@ namespace objects
 			}
 		}
 	}
+
+	iPoint Level::size()
+	{
+		return mSize;
+	}
+
+	Tile Level::get(iPoint at)
+	{
+		return mLand[at.x][at.y];
+	}
+
+	void Level::set(iPoint at, Tile t)
+	{
+		mLand[at.x][at.y] = t;
+	}
 }
