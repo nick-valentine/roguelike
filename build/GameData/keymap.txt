@@ -1,0 +1,7 @@
+
+h left
+k up
+j down
+l right
+y select
+n back
