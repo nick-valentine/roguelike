@@ -18,7 +18,7 @@ namespace levelPass
 
 		virtual void execute(objects::Level &l);
 	private:
-		void makeNextReachable(objects::Level &l, const Matrix<objects::Tile> *m, uint roomIDX);
+		std::vector<iPoint> findNextPath(objects::Level &l, const Matrix<objects::Tile> *m, uint roomIDX);
 		void open(objects::Level &l, iPoint p);
 
 		iPoint mSize;

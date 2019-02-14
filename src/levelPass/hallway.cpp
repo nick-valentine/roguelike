@@ -4,7 +4,9 @@
 
 #include <iostream>
 #include <thread>
+#include <future>
 #include <vector>
+#include <functional>
 
 namespace levelPass
 {
@@ -16,29 +18,42 @@ namespace levelPass
 		}
 		mSize = {(int)m.size(), (int)m[0].size()};
 
+		std::vector< std::future<
+			std::vector<iPoint>
+		> > futures;
+
 		std::vector<std::thread> threads;
+
 		for (int i = 0; i < l.rooms().size() - 1; ++i) {
-			threads.push_back(std::thread(&Hallway::makeNextReachable, this, std::ref(l), &m, i));
+			std::packaged_task<
+				std::vector<iPoint>(objects::Level, const Matrix<objects::Tile>*, uint)
+			> task(std::bind(&Hallway::findNextPath, this, std::ref(l), &m, i));
+
+			futures.push_back(task.get_future());
+
+			threads.push_back(std::thread(std::move(task), std::ref(l), &m, i));
 		}
+
 		std::for_each(threads.begin(), threads.end(), [](std::thread &t) {t.join();});
+
+		for (auto &result : futures) {
+			for (const auto &k : result.get()) {
+				open(l, k);
+			}
+		}
 	}
 
-	void Hallway::makeNextReachable(objects::Level &l, const Matrix<objects::Tile> *m, uint roomIDX)
+	std::vector<iPoint> Hallway::findNextPath(objects::Level &l, const Matrix<objects::Tile> *m, uint roomIDX)
 	{
-		std::cerr<<roomIDX<<" started"<<std::endl;
 		auto rooms = l.rooms();
 		if (roomIDX >= rooms.size()-1) {
-			return;
+			return std::vector<iPoint>();
 		}
 		auto current = rooms[roomIDX];
 		auto next = rooms[roomIDX+1];
 
 		Route<objects::Tile> r(*m);
-		auto path = r.find(current, next, [](objects::Tile t)->bool{return t.describe().collidable;});
-		for (const auto &k : path) {
-			open(l, k);
-		}
-		std::cerr<<roomIDX<<" done"<<std::endl;
+		return r.find(current, next, [](objects::Tile t)->bool{return t.describe().collidable;});
 	}
 
 	void Hallway::open(objects::Level &l, iPoint k)
