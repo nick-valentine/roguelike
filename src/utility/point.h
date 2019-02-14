@@ -18,7 +18,6 @@ namespace utility
 	}
 
 	using iPoint = Point<int>;
-	using fPoint = Point<float>;
 }
 
 #endif // UTILITY_POINT_H
