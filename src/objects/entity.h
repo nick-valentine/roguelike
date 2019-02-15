@@ -30,7 +30,7 @@ namespace objects
 		UpdateFunc mFunc;
 	};
 
-	Entity make_player(iPoint pos);
+	Entity makePlayer(iPoint pos);
 }
 
 #endif // OBJECTS_ENTITY_H

@@ -7,7 +7,6 @@ namespace state
 		mLevelPasses = levelPass::defaultPasses();
 		this->generateLevel();
 		mLog->info("hello world!");
-		mLevel->setPlayer(objects::make_player(iPoint(0,0)));
 	}
 
 	void Playing::update(Context *ctx)

@@ -7,6 +7,7 @@ namespace levelPass
 		std::vector<ptr> p;
 		p.push_back(std::make_unique<Room>(40));
 		p.push_back(std::make_unique<Hallway>());
+		p.push_back(std::make_unique<Player>());
 		return p;
 	}
 }

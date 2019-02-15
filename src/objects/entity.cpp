@@ -33,7 +33,7 @@ namespace objects
 		mFunc(this, ctx);
 	}
 
-	Entity make_player(iPoint pos)
+	Entity makePlayer(iPoint pos)
 	{
 		return Entity{
 			pos,
