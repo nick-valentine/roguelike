@@ -5,6 +5,7 @@
 #include <vector>
 #include "../levelPass/levelPass.h"
 #include "../objects/level.h"
+#include "../camera.h"
 
 #include "abstract.h"
 
@@ -19,6 +20,7 @@ namespace state
 	private:
 		void generateLevel();
 		
+		Camera mCamera;
 		std::unique_ptr<objects::Level> mLevel;
 		std::vector<levelPass::ptr> mLevelPasses;
 	};

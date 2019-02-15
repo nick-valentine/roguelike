@@ -9,11 +9,11 @@ namespace objects
 		matrix::fill(mLand, mSize, Tile(TileName::Wall));
 	}
 
-	void Level::draw(window::ptr &win)
+	void Level::draw(window::ptr &win, iPoint offset)
 	{
 		for(int i = 1; i < mLand.size(); ++i) {
 			for (int j = 1; j < mLand[i].size(); ++j) {
-				mLand[i][j].drawAt(win, iPoint(i,j));
+				mLand[i][j].drawAt(win, iPoint(i - offset.x,j - offset.y));
 			}
 		}
 	}

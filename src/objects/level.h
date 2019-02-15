@@ -20,7 +20,7 @@ namespace objects
 	public:
 		Level(iPoint size);
 
-		void draw(window::ptr &win);
+		void draw(window::ptr &win, iPoint offset);
 
 		iPoint size();
 		Tile get(iPoint at);
