@@ -21,7 +21,7 @@ namespace window
 		auto rit = buffer.rbegin();
 		for (;rit != buffer.rend() && posMarker > 0; ++rit) {
 			posMarker -= ((*rit).second.size() / width) + 1;
-			this->putstr(iPoint(1, posMarker), (*rit).second, 2 /*(int)(*rit).first */);
+			this->putstr(iPoint(1, posMarker), (*rit).second, (int)(*rit).first);
 		}
 		Curses::render();
 	}
