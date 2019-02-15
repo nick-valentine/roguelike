@@ -13,22 +13,9 @@ namespace state
 	{
 		mLevel->update(ctx);
 		auto player = mLevel->getPlayer();
-		mLog->info("player is at (%i %i)", player->pos().x, player->pos().y);
 		mCamera.moveTo(player->pos());
 
 		switch (ctx->input) {
-		// case Input::UP:
-		// 	mCamera.move(iPoint(0, -1));
-		// 	break;
-		// case Input::DOWN:
-		// 	mCamera.move(iPoint(0, 1));
-		// 	break;
-		// case Input::LEFT:
-		// 	mCamera.move(iPoint(-1, 0));
-		// 	break;
-		// case Input::RIGHT:
-		// 	mCamera.move(iPoint(1, 0));
-		// 	break;
 		case Input::ESCAPE:
 			mShouldClose = true;
 			return;

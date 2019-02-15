@@ -23,6 +23,7 @@ namespace state
 		Camera mCamera;
 		std::unique_ptr<objects::Level> mLevel;
 		std::vector<levelPass::ptr> mLevelPasses;
+
 	};
 }
 

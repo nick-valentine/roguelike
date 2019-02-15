@@ -11,6 +11,17 @@ namespace objects::brain {
 		{
 			return !l.get(to).describe().collidable;
 		}
+
+		struct randMover
+		{
+			uint moveModulo : 3;
+		};
+
+		union randMoverMemory
+		{
+			uint i;
+			randMover b;
+		};
 	}
 
 	void player(objects::Entity *e, Context *ctx, const Level &l)
@@ -40,6 +51,14 @@ namespace objects::brain {
 
 	void randMover(objects::Entity *e, Context *ctx, const Level &l)
 	{
+		helper::randMoverMemory mem;
+		mem.i = e->memory;
+		mem.b.moveModulo++;
+		e->memory = mem.i;
+		if (mem.b.moveModulo != 0) {
+			return;
+		}
+
 		std::random_device rd;
 		std::mt19937 mt(rd());
 

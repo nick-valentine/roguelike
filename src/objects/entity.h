@@ -24,6 +24,8 @@ namespace objects
 
 		void drawAt(window::ptr &win, iPoint pos) const;
 		void update(const Level &l, Context *ctx);
+
+		uint memory = 0;
 	private:
 		iPoint mPos = {0,0};
 		char mRep = ' ';
