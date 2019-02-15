@@ -2,12 +2,15 @@
 
 namespace state
 {
-	Fight::Fight(const objects::Entity *player, const objects::Entity *other) : Abstract(), mPlayer(player), mOther(other)
+	Fight::Fight(const objects::Entity *player, objects::EntityAttribute *playerStats, const objects::Entity *other) : 
+		Abstract(), mPlayer(player), mPlayerStats(playerStats), mOther(other)
 	{
 		std::vector<std::string> options;
 		options.push_back("Punch");
 		options.push_back("Run");
 		mActionMenu = component::Menu("What do?", options, iPoint(1, 1), iPoint(40, 40));
+
+		mLog->info("you have %i health", mPlayerStats->health);
 	}
 
 	void Fight::update(Context *ctx)
@@ -20,9 +23,11 @@ namespace state
 			break;
 		case 0:
 			mLog->info("you punched");
+			mLog->info("you have %i health", mPlayerStats->health);
 			break;
 		case 1:
 			mLog->info("you ran");
+			mLog->info("you have %i health", mPlayerStats->health);
 			break;
 		default:
 			break;

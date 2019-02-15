@@ -8,6 +8,7 @@ namespace state
 	{
 		mLevelPasses = levelPass::defaultPasses();
 		this->generateLevel();
+		mPlayerStats = objects::attributes::basePlayer();
 		mLog->info("hello world!");
 	}
 
@@ -32,7 +33,7 @@ namespace state
 				}
 
 				mLog->warn("you ran into a %s!", notPlayer->name.c_str());
-				mNextState = new Fight(player, notPlayer);
+				mNextState = new Fight(player, &mPlayerStats, notPlayer);
 				return;
 			}
 		}

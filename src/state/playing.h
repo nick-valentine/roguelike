@@ -5,6 +5,7 @@
 #include <vector>
 #include "../levelPass/levelPass.h"
 #include "../objects/level.h"
+#include "../objects/entityAttribute.h"
 #include "../camera.h"
 
 #include "abstract.h"
@@ -20,6 +21,8 @@ namespace state
 	private:
 		void generateLevel();
 		
+		objects::EntityAttribute mPlayerStats;
+
 		Camera mCamera;
 		std::unique_ptr<objects::Level> mLevel;
 		std::vector<levelPass::ptr> mLevelPasses;
