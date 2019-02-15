@@ -1,22 +1,38 @@
 #include "entityBrain.h"
 #include "entity.h"
+#include "level.h"
 
 namespace objects::brain {
-	void player(objects::Entity *e, Context *ctx)
+	namespace helper
 	{
+		bool canMove(iPoint to, const objects::Level &l)
+		{
+			return !l.get(to).describe().collidable;
+		}
+	}
+
+	void player(objects::Entity *e, Context *ctx, const Level &l)
+	{
+		iPoint delta{0,0};
 		switch (ctx->input) {
 		case Input::UP:
-			e->move(iPoint(0, -1));
+			delta = iPoint(0, -1);
 			break;
 		case Input::DOWN:
-			e->move(iPoint(0, 1));
+			delta = iPoint(0, 1);
 			break;
 		case Input::LEFT:
-			e->move(iPoint(-1, 0));
+			delta = iPoint(-1, 0);
 			break;
 		case Input::RIGHT:
-			e->move(iPoint(1, 0));
+			delta = iPoint(1, 0);
 			break;
+		}
+
+		auto pos = e->pos();
+		iPoint to{pos.x + delta.x, pos.y + delta.y};
+		if (helper::canMove(to, l)) {
+			e->move(delta);
 		}
 	}
 }

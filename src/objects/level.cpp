@@ -25,7 +25,7 @@ namespace objects
 	void Level::update(Context *ctx)
 	{
 		for (auto &i : mEntities) {
-			i.update(ctx);
+			i.update(*this, ctx);
 		}
 	}
 
@@ -34,7 +34,7 @@ namespace objects
 		return mSize;
 	}
 
-	Tile Level::get(iPoint at)
+	Tile Level::get(iPoint at) const
 	{
 		return mLand[at.x][at.y];
 	}

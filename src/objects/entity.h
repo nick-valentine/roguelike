@@ -10,8 +10,9 @@ using namespace utility;
 namespace objects
 {
 	class Entity;
+	class Level;
 
-	typedef void(*UpdateFunc)(Entity*, Context*);
+	typedef void(*UpdateFunc)(Entity*, Context*, const Level&);
 
 	class Entity
 	{
@@ -22,7 +23,7 @@ namespace objects
 		iPoint pos() const;
 
 		void drawAt(window::ptr &win, iPoint pos) const;
-		void update(Context *ctx);
+		void update(const Level &l, Context *ctx);
 	private:
 		iPoint mPos = {0,0};
 		char mRep = ' ';

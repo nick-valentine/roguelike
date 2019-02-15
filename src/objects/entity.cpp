@@ -1,5 +1,6 @@
 #include "entity.h"
 #include "entityBrain.h"
+#include "level.h"
 
 namespace objects
 {
@@ -28,9 +29,9 @@ namespace objects
 		);
 	}
 
-	void Entity::update(Context *ctx)
+	void Entity::update(const Level &l, Context *ctx)
 	{
-		mFunc(this, ctx);
+		mFunc(this, ctx, l);
 	}
 
 	Entity makePlayer(iPoint pos)

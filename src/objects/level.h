@@ -26,7 +26,7 @@ namespace objects
 		void update(Context *ctx);
 
 		iPoint size();
-		Tile get(iPoint at);
+		Tile get(iPoint at) const;
 		void set(iPoint at, Tile t);
 		void addRoom(iPoint p);
 		void addEntity(Entity e);
