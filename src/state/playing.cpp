@@ -1,5 +1,7 @@
 #include "playing.h"
 
+#include "fight.h"
+
 namespace state
 {
 	Playing::Playing() : Abstract(), mCamera(iPoint(0, 0))
@@ -14,6 +16,26 @@ namespace state
 		mLevel->update(ctx);
 		auto player = mLevel->getPlayer();
 		mCamera.moveTo(player->pos());
+
+		auto c = mLevel->checkCollision();
+		if (c.first != -1) {
+			auto first = mLevel->getEntity(c.first);
+			auto second = mLevel->getEntity(c.second);
+			auto player = mLevel->getPlayer();
+			const objects::Entity* notPlayer = nullptr;
+			mLog->warn("%s ran into a %s!", first->name.c_str(), second->name.c_str());
+			if (first == player || second == player) {
+				if (first != player) {
+					notPlayer = first;
+				} else {
+					notPlayer = second;
+				}
+
+				mLog->warn("you ran into a %s!", notPlayer->name.c_str());
+				mNextState = new Fight(player, notPlayer);
+				return;
+			}
+		}
 
 		switch (ctx->input) {
 		case Input::ESCAPE:

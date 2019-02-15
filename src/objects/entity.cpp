@@ -4,7 +4,7 @@
 
 namespace objects
 {
-	Entity::Entity(iPoint pos, char rep, int color, UpdateFunc func) : mPos(pos), mRep(rep), mColor(color), mFunc(func)
+	Entity::Entity(iPoint pos, char rep, int color, std::string name, UpdateFunc func) : mPos(pos), mRep(rep), mColor(color), name(name), mFunc(func)
 	{
 	}
 
@@ -40,6 +40,7 @@ namespace objects
 			pos,
 			'A',
 			2,
+			"player",
 			brain::player
 		};
 	}
@@ -50,6 +51,7 @@ namespace objects
 			pos,
 			'G',
 			3,
+			"grunt",
 			brain::randMover
 		};
 	}

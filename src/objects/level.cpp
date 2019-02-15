@@ -29,6 +29,18 @@ namespace objects
 		}
 	}
 
+	std::pair<int, int> Level::checkCollision()
+	{
+		for (int i = 0; i < mEntities.size(); ++i) {
+			for (int j = i + 1; j < mEntities.size(); ++j) {
+				if (mEntities[i].pos() == mEntities[j].pos()) {
+					return std::pair{i,j};
+				}
+			}
+		}
+		return std::pair{-1, -1};
+	}
+
 	iPoint Level::size()
 	{
 		return mSize;
@@ -52,6 +64,11 @@ namespace objects
 	void Level::addEntity(Entity e)
 	{
 		mEntities.push_back(e);
+	}
+
+	const Entity *Level::getEntity(int i) const
+	{
+		return &mEntities[i];
 	}
 
 	void Level::setPlayer(Entity e)

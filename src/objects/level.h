@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
+#include <utility>
 
 #include "../utility/point.h"
 #include "../utility/matrix.h"
@@ -24,12 +25,14 @@ namespace objects
 
 		void draw(window::ptr &win, iPoint offset);
 		void update(Context *ctx);
+		std::pair<int, int> checkCollision();
 
 		iPoint size();
 		Tile get(iPoint at) const;
 		void set(iPoint at, Tile t);
 		void addRoom(iPoint p);
 		void addEntity(Entity e);
+		const Entity *getEntity(int i) const;
 		void setPlayer(Entity e);
 		const Entity *getPlayer() const;
 		const std::vector<iPoint> &rooms() const;

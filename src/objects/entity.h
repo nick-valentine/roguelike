@@ -17,7 +17,7 @@ namespace objects
 	class Entity
 	{
 	public:
-		Entity(iPoint pos, char rep, int color, UpdateFunc func);
+		Entity(iPoint pos, char rep, int color, std::string name, UpdateFunc func);
 
 		void move(iPoint by);
 		iPoint pos() const;
@@ -26,6 +26,7 @@ namespace objects
 		void update(const Level &l, Context *ctx);
 
 		uint memory = 0;
+		std::string name;
 	private:
 		iPoint mPos = {0,0};
 		char mRep = ' ';
