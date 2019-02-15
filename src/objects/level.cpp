@@ -16,6 +16,17 @@ namespace objects
 				mLand[i][j].drawAt(win, iPoint(i - offset.x,j - offset.y));
 			}
 		}
+
+		for (const auto &i : mEntities) {
+			i.drawAt(win, offset);
+		}
+	}
+
+	void Level::update(Context *ctx)
+	{
+		for (auto &i : mEntities) {
+			i.update(ctx);
+		}
 	}
 
 	iPoint Level::size()
@@ -36,6 +47,22 @@ namespace objects
 	void Level::addRoom(iPoint p)
 	{
 		mRooms.push_back(p);
+	}
+
+	void Level::addEntity(Entity e)
+	{
+		mEntities.push_back(e);
+	}
+
+	void Level::setPlayer(Entity e)
+	{
+		mPlayer = mEntities.size();
+		mEntities.push_back(e);
+	}
+
+	const Entity *Level::getPlayer() const
+	{
+		return &mEntities[mPlayer];
 	}
 
 	const std::vector<iPoint> &Level::rooms() const
