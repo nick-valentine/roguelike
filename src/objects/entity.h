@@ -32,6 +32,7 @@ namespace objects
 	};
 
 	Entity makePlayer(iPoint pos);
+	Entity makeGrunt(iPoint pos);
 }
 
 #endif // OBJECTS_ENTITY_H

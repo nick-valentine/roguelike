@@ -5,6 +5,7 @@
 #include "room.h"
 #include "hallway.h"
 #include "player.h"
+#include "enemies.h"
 
 namespace levelPass
 {

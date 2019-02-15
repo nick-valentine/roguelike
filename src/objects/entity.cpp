@@ -43,4 +43,14 @@ namespace objects
 			brain::player
 		};
 	}
+
+	Entity makeGrunt(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'G',
+			3,
+			brain::randMover
+		};
+	}
 }
