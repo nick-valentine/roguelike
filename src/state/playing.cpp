@@ -6,11 +6,12 @@ namespace state
 	{
 		mLevelPasses = levelPass::defaultPasses();
 		this->generateLevel();
+		mLog->info("hello world!");
 	}
 
 	void Playing::update(Context *ctx)
 	{
-
+		mLog->info("hello world!");
 	}
 
 	void Playing::render(window::ptr &win)

@@ -7,7 +7,7 @@ namespace utility
 		mFG[mTop] = fg;
 		mBG[mTop] = bg;
 		mTop++;
-		if (mTop >= ColorPallette::NumColors) {
+		if (mTop > ColorPallette::NumColors) {
 			throw ColorOverflow();
 		}
 	}

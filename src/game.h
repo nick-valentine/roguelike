@@ -7,6 +7,7 @@
 #include "utility/colorPallette.h"
 #include "state/abstract.h"
 #include "window/abstract.h"
+#include "utility/log.h"
 #include "keyMap.h"
 
 using namespace utility;
@@ -21,7 +22,9 @@ public:
 
 	void generateLevel();
 private:
-	window::ptr mWin = nullptr;
+	window::ptr gameWin = nullptr;
+	window::ptr logWin = nullptr;
+	utility::logger::ptr mLogger;
 
 	ColorPallette mPallette;
 

@@ -4,6 +4,7 @@
 #include <thread>
 
 #include "window/game.h"
+#include "window/log.h"
 #include "state/mainMenu.h"
 
 Game::Game()
@@ -11,10 +12,23 @@ Game::Game()
 	int maxY, maxX;
 	getmaxyx(stdscr, maxY, maxX);
 	mScreenDims = iPoint(maxX, maxY);
-	mWin = std::make_unique<window::Game>(iPoint(0, 0), mScreenDims);
+	auto gameScreenDims = iPoint(maxX, maxY *  0.8);
+	gameWin = std::make_unique<window::Game>(iPoint(0, 0), gameScreenDims);
+	auto lWin = std::make_unique<window::Log>(iPoint(0, gameScreenDims.y), iPoint(mScreenDims.x, mScreenDims.y - gameScreenDims.y));
+	mLogger = lWin->log();
+	logWin = std::move(lWin);
+
+	mLogger->warn("goodbye");
 
 	mStateStack.push(new state::MainMenu());
+	mStateStack.top()->setLogger(mLogger);
 
+	mPallette.addColor(COLOR_GREEN,  COLOR_BLACK);
+	mPallette.addColor(COLOR_WHITE,  COLOR_BLACK);
+	mPallette.addColor(COLOR_YELLOW, COLOR_BLACK);
+	mPallette.addColor(COLOR_RED,    COLOR_BLACK);
+	mPallette.addColor(COLOR_WHITE,  COLOR_BLACK);
+	mPallette.addColor(COLOR_GREEN,  COLOR_BLACK);
 	mPallette.addColor(COLOR_YELLOW, COLOR_BLACK);
 	mPallette.addColor(COLOR_RED,    COLOR_BLACK);
 }
@@ -26,12 +40,13 @@ int Game::run()
 	mPallette.activate();
 
 	while (true) {
-		mWin->render();
+		gameWin->render();
+		logWin->render();
 
-		mWin->clear();
-		mStateStack.top()->render(mWin);
+		gameWin->clear();
+		mStateStack.top()->render(gameWin);
 
-		int rawInput = mWin->getCh();
+		int rawInput = gameWin->getCh();
 		auto input = mKeymap.convert(rawInput);
 
 		Context ctx;
@@ -53,6 +68,7 @@ int Game::run()
 			auto oldState = mStateStack.top();
 			newState->recvDown(oldState->passUp());
 			mStateStack.push(newState);
+			mStateStack.top()->setLogger(mLogger);
 			oldState->clearNextState();
 		}
 	}

@@ -5,6 +5,7 @@
 
 #include "../context.h"
 #include "../window/abstract.h"
+#include "../utility/log.h"
 
 namespace state
 {
@@ -15,6 +16,7 @@ namespace state
 	class Abstract
 	{
 	public:
+		Abstract();
 		virtual ~Abstract() = default;
 		virtual void update(Context *ctx) = 0;
 		virtual void render(window::ptr &win) = 0;
@@ -26,6 +28,8 @@ namespace state
 		virtual int passUp();
 		virtual void recvDown(int msg);
 		virtual void recvUp(int msg);
+
+		virtual void setLogger(utility::logger::ptr log);
 	protected:
 		int mMsgDown = 0;
 		int mMsgUp = 0;
@@ -33,6 +37,8 @@ namespace state
 		int mRecvMsgUp = 0;
 		Abstract *mNextState = nullptr;
 		bool mShouldClose = false;
+
+		utility::logger::ptr mLog = nullptr;
 	};
 }
 

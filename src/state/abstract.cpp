@@ -2,6 +2,11 @@
 
 namespace state
 {
+	Abstract::Abstract()
+	{
+		mLog = std::make_shared<utility::logger::Null>();
+	}
+
 	int Abstract::passDown()
 	{
 		return mMsgDown;
@@ -35,5 +40,10 @@ namespace state
 	bool Abstract::shouldClose()
 	{
 		return mShouldClose;
+	}
+
+	void Abstract::setLogger(utility::logger::ptr log)
+	{
+		mLog = log;
 	}
 }
