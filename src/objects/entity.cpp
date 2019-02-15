@@ -1,10 +1,12 @@
 #include "entity.h"
 #include "entityBrain.h"
+#include "entityAttribute.h"
 #include "level.h"
 
 namespace objects
 {
-	Entity::Entity(iPoint pos, char rep, int color, std::string name, UpdateFunc func) : mPos(pos), mRep(rep), mColor(color), name(name), mFunc(func)
+	Entity::Entity(iPoint pos, char rep, int color, std::string name, UpdateFunc func, AttrFunc aFunc) : 
+		mPos(pos), mRep(rep), mColor(color), name(name), mFunc(func), mAFunc(aFunc)
 	{
 	}
 
@@ -34,6 +36,11 @@ namespace objects
 		mFunc(this, ctx, l);
 	}
 
+	EntityAttribute Entity::genAttributes(uint level) const
+	{
+		return mAFunc(level);
+	}
+
 	Entity makePlayer(iPoint pos)
 	{
 		return Entity{
@@ -41,7 +48,8 @@ namespace objects
 			'A',
 			2,
 			"player",
-			brain::player
+			brain::player,
+			attributes::basePlayer
 		};
 	}
 
@@ -52,7 +60,8 @@ namespace objects
 			'G',
 			3,
 			"grunt",
-			brain::randMover
+			brain::randMover,
+			attributes::grunt
 		};
 	}
 }

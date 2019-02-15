@@ -66,6 +66,12 @@ namespace objects
 		mEntities.push_back(e);
 	}
 
+	void Level::killEntity(int i)
+	{
+		mEntities[i] = mEntities[mEntities.size() - 1];
+		mEntities.pop_back();		
+	}
+
 	const Entity *Level::getEntity(int i) const
 	{
 		return &mEntities[i];

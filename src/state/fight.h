@@ -8,6 +8,12 @@
 
 namespace state
 {
+	struct damageType
+	{
+		bool physical = false;
+		bool magicka = false;
+	};
+
 	class Fight : public Abstract
 	{
 	public:
@@ -15,10 +21,16 @@ namespace state
 		void update(Context *ctx);
 		void render(window::ptr &win);
 	private:
+		void attack(std::string attackeeName, int weapon, objects::EntityAttribute *attacker, objects::EntityAttribute *attackee);
+		void reportTurn();
+		void reportEnemy();
+		void reportSelf();
+
 		component::Menu mActionMenu;
 		const objects::Entity *mPlayer;
 		const objects::Entity *mOther;
 		objects::EntityAttribute *mPlayerStats;
+		objects::EntityAttribute mOtherStats;
 	};
 }
 

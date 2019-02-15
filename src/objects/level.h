@@ -33,6 +33,7 @@ namespace objects
 		void addRoom(iPoint p);
 		void addEntity(Entity e);
 		const Entity *getEntity(int i) const;
+		void killEntity(int i);
 		void setPlayer(Entity e);
 		const Entity *getPlayer() const;
 		const std::vector<iPoint> &rooms() const;

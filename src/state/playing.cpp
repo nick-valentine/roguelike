@@ -8,12 +8,24 @@ namespace state
 	{
 		mLevelPasses = levelPass::defaultPasses();
 		this->generateLevel();
-		mPlayerStats = objects::attributes::basePlayer();
+		mPlayerStats = objects::attributes::basePlayer(1);
 		mLog->info("hello world!");
 	}
 
 	void Playing::update(Context *ctx)
 	{
+		if (mRecvMsgUp == 1) {
+			// player killed monster
+			mLevel->killEntity(mFightingMonster);
+			mFightingMonster = -1;
+		}
+		if (mRecvMsgUp == 2) {
+			// player died
+			mShouldClose = true;
+			return;
+		}
+		mRecvMsgUp = 0;
+
 		mLevel->update(ctx);
 		auto player = mLevel->getPlayer();
 		mCamera.moveTo(player->pos());
@@ -28,8 +40,10 @@ namespace state
 			if (first == player || second == player) {
 				if (first != player) {
 					notPlayer = first;
+					mFightingMonster = c.first;
 				} else {
 					notPlayer = second;
+					mFightingMonster = c.second;
 				}
 
 				mLog->warn("you ran into a %s!", notPlayer->name.c_str());
