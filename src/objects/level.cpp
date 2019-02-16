@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+#define MAX_VIEW_DISTANCE 5
+
 namespace objects 
 {
 	Level::Level(iPoint size) : mSize(size)
@@ -11,14 +13,22 @@ namespace objects
 
 	void Level::draw(window::ptr &win, iPoint offset)
 	{
+		auto p = getPlayer()->pos();
 		for(int i = 1; i < mLand.size(); ++i) {
 			for (int j = 1; j < mLand[i].size(); ++j) {
-				mLand[i][j].drawAt(win, iPoint(i - offset.x,j - offset.y));
+				iPoint diff(p.x - i, p.y - j);
+				int distance = sqrt((diff.y * diff.y)+(diff.x * diff.x));
+				mLand[i][j].drawAt(win, iPoint(i - offset.x,j - offset.y), distance > MAX_VIEW_DISTANCE);
 			}
 		}
 
 		for (const auto &i : mEntities) {
-			i.drawAt(win, offset);
+			auto e = i.pos();
+			iPoint diff(p.x - e.x, p.y - e.y);
+			int distance = sqrt((diff.y * diff.y)+(diff.x * diff.x));
+			if (distance <= MAX_VIEW_DISTANCE) {
+				i.drawAt(win, offset);
+			}
 		}
 	}
 

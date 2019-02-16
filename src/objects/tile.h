@@ -34,7 +34,7 @@ namespace objects
 	public:
 		Tile(TileName type);
 
-		void drawAt(window::ptr &win, iPoint pos);
+		void drawAt(window::ptr &win, iPoint pos, bool cull);
 		const TileType describe() const;
 		TileName name() const;
 
@@ -43,6 +43,7 @@ namespace objects
 		static const std::array<TileType, (int)TileName::Count> Tiles;
 
 		int mType = 0;
+		bool mHasBeenSeen = false;
 	};
 }
 #endif // OBJECTS_TILE_H

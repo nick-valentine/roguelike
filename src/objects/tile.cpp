@@ -13,14 +13,24 @@ namespace objects
 	{
 	}
 
-	void Tile::drawAt(window::ptr &win, iPoint pos)
+	void Tile::drawAt(window::ptr &win, iPoint pos, bool cull)
 	{
-		win->put(
-			Tile::Tiles[mType].colorPair,
-			/* layer */ 1,
-			Tile::Tiles[mType].tile,
-			pos
-		);
+		if (!cull) {
+			mHasBeenSeen = true;
+			win->put(
+				Tile::Tiles[mType].colorPair,
+				/* layer */ 1,
+				Tile::Tiles[mType].tile,
+				pos
+			);
+		} else if (mHasBeenSeen) {
+			win->put(
+				0,
+				/* layer */ 1,
+				Tile::Tiles[mType].tile,
+				pos
+			);
+		}
 	}
 
 	const TileType Tile::describe() const
