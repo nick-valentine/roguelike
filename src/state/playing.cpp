@@ -51,6 +51,11 @@ namespace state
 			mLog->info("leaving so soon?");
 		} else if (mLevel.top()->get(pos).name() == objects::TileName::DownStairs) {
 			this->generateLevel();
+		} else if (mLevel.top()->get(pos).name() == objects::TileName::Treasure) {
+			auto i = objects::items::loot(mLevel.size());
+			mLog->info("You found a chest, it contained a %s", i.name.c_str());
+			mPlayerStats.award(i);
+			mLevel.top()->set(pos, objects::Tile(objects::TileName::Empty));
 		}
 
 		auto c = mLevel.top()->checkCollision();

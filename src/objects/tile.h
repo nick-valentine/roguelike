@@ -26,6 +26,7 @@ namespace objects
 		Empty,
 		DownStairs,
 		UpStairs,
+		Treasure,
 		Count
 	};
 

@@ -10,6 +10,7 @@ namespace levelPass
 		p.push_back(std::make_unique<Player>());
 		p.push_back(std::make_unique<Enemies>(5 * level));
 		p.push_back(std::make_unique<Exit>());
+		p.push_back(std::make_unique<Treasure>(2 * level, level));
 		return p;
 	}
 }

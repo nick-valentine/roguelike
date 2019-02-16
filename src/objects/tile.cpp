@@ -6,7 +6,8 @@ namespace objects
 		TileType('#', 1, true),
 		TileType(' ', 1, false),
 		TileType('D', 2, false),
-		TileType('U', 2, false)
+		TileType('U', 2, false),
+		TileType('C', 3, false)
 	};
 
 	Tile::Tile(TileName type) : mType((int)type)
@@ -15,6 +16,7 @@ namespace objects
 
 	void Tile::drawAt(window::ptr &win, iPoint pos, bool cull)
 	{
+		cull = false;
 		if (!cull) {
 			mHasBeenSeen = true;
 			win->put(
