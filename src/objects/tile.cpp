@@ -16,7 +16,6 @@ namespace objects
 
 	void Tile::drawAt(window::ptr &win, iPoint pos, bool cull)
 	{
-		cull = false;
 		if (!cull) {
 			mHasBeenSeen = true;
 			win->put(

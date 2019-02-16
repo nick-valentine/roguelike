@@ -3,6 +3,7 @@
 #include "itemFuncs.h"
 
 #include <random>
+#include <array>
 
 namespace objects
 {
@@ -19,29 +20,32 @@ namespace objects
 	{
 		Item loot(int level)
 		{
+			std::array<std::pair<Item(*)(), int>, 9> v{
+				std::pair{swordWood, 10},
+				std::pair{swordBronze, 5},
+				std::pair{swordSteel, 3},
+				std::pair{swordMystic, 1},
+				std::pair{picaxe, 10},
+				std::pair{helmetWood, 10},
+				std::pair{tunicLeather, 5},
+				std::pair{tunicIron, 3},
+				std::pair{smallHealthPotion, 5}
+			};
+			int total = 0;
+			for (const auto &i : v) {
+				total += i.second;
+			}
+
 			std::random_device rd;
 			std::mt19937 mt(rd());
+			std::uniform_int_distribution<int> loot(0, total);
 
-			if (level > 10) {
-				std::uniform_int_distribution<int> loot(0, 1);
-				switch (loot(mt)) {
-				case 0:
-					return swordMystic();
-				case 1:
-					return swordSteel();
+			for (const auto &i : v) {
+				total -= i.second;
+				if (total <= 0) {
+					return i.first();
 				}
 			}
-			if (level > 5) {
-				return swordBronze();
-			}
-			std::uniform_int_distribution<int> loot(0, 1);
-			switch (loot(mt)) {
-			case 0:
-				return swordWood();
-			case 1:
-				return helmetWood();
-			}
-			
 		}
 
 		Item swordWood()
@@ -74,9 +78,18 @@ namespace objects
 		Item swordMystic()
 		{
 			return Item{
-				"bronze sword",
+				"mystic sword",
 				true, false, false,
 				1, 1, 3, 0, 8
+			};
+		}
+
+		Item picaxe()
+		{
+			return Item{
+				"picaxe",
+				true, false, false,
+				4, 1, 2, 1, 0
 			};
 		}
 
@@ -86,6 +99,24 @@ namespace objects
 				"wooden helmet",
 				false, true, false,
 				1, 3, 1, 0, 0
+			};
+		}
+
+		Item tunicLeather()
+		{
+			return Item{
+				"leather tunic",
+				false, true, false,
+				1, 5, 1, 0, 0
+			};
+		}
+
+		Item tunicIron()
+		{
+			return Item{
+				"iron tunic",
+				false, true, false,
+				1, 8, 1, 0, 0
 			};
 		}
 

@@ -30,6 +30,9 @@ namespace objects
 	{
 		EntityAttribute basePlayer(uint level);
 		EntityAttribute grunt(uint level);
+		EntityAttribute worker(uint level);
+		EntityAttribute soldier(uint level);
+		EntityAttribute queen(uint level);
 	}
 }
 

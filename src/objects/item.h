@@ -35,8 +35,13 @@ namespace objects
 		Item swordSteel();
 		Item swordMystic();
 
+		// misc
+		Item picaxe();
+
 		// armors
 		Item helmetWood();
+		Item tunicLeather();
+		Item tunicIron();
 
 		//potions
 		Item smallHealthPotion();

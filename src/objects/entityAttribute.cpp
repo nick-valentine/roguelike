@@ -19,8 +19,8 @@ namespace objects
 			auto which = dist(mt);
 			switch (which) {
 			case 0:
-				health++;
-				maxHealth++;
+				health+=5;
+				maxHealth+=5;
 				break;
 			case 1:
 				strength++;
@@ -95,6 +95,56 @@ namespace objects
 			};
 
 			e.weapons.push_back(objects::items::swordWood());
+			e.levelUp(level - 1);
+			return e;
+		}
+
+		EntityAttribute worker(uint level)
+		{
+			EntityAttribute e{
+				15,
+				5,
+				5,
+				2,
+				3,
+				0
+			};
+
+			e.weapons.push_back(objects::items::picaxe());
+			e.levelUp(level - 1);
+			return e;
+		}
+
+		EntityAttribute soldier(uint level)
+		{
+			EntityAttribute e{
+				20,
+				7,
+				7,
+				4,
+				4,
+				0
+			};
+
+			e.armor.push_back(objects::items::tunicLeather());
+			e.weapons.push_back(objects::items::swordBronze());
+			e.levelUp(level - 1);
+			return e;
+		}
+
+		EntityAttribute queen(uint level)
+		{
+			EntityAttribute e{
+				15,
+				7,
+				7,
+				6,
+				4,
+				8
+			};
+
+			e.armor.push_back(objects::items::tunicIron());
+			e.weapons.push_back(objects::items::swordMystic());
 			e.levelUp(level - 1);
 			return e;
 		}

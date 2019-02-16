@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#define MAX_VIEW_DISTANCE 5
+#define MAX_VIEW_DISTANCE 7
 
 namespace objects 
 {

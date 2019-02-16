@@ -41,6 +41,12 @@ namespace objects
 
 	Entity makePlayer(iPoint pos);
 	Entity makeGrunt(iPoint pos);
+
+	// spiders
+	Entity makeSpiderGrunt(iPoint pos);
+	Entity makeSpiderWorker(iPoint pos);
+	Entity makeSpiderQueen(iPoint pos);
+	Entity makeSpiderSoldier(iPoint pos);
 }
 
 #endif // OBJECTS_ENTITY_H

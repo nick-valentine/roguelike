@@ -17,6 +17,7 @@ namespace objects::brain {
 	}
 	void player(objects::Entity *e, Context *ctx, const objects::Level &l);
 	void randMover(objects::Entity *e, Context *ctx, const objects::Level &l);
+	void blindSniffer(objects::Entity *e, Context *ctx, const objects::Level &l);
 }
 
 #endif // OBJECTS_ENTITY_BRAIN_H

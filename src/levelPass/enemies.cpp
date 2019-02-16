@@ -43,10 +43,21 @@ namespace levelPass
 
 	objects::Entity Enemies::spawn(iPoint where)
 	{
-		// std::random_device rd;
-		// std::mt19937 mt(rd());
+		std::random_device rd;
+		std::mt19937 mt(rd());
 
-		// std::uniform_int_distribution<int> which(0, 1);
-		return objects::makeGrunt(where);
+		std::uniform_int_distribution<int> which(0, 5);
+		switch (which(mt)) {
+		case 0:
+			return objects::makeGrunt(where);
+		case 1:
+			return objects::makeSpiderGrunt(where);
+		case 2:
+			return objects::makeSpiderWorker(where);
+		case 3:
+			return objects::makeSpiderQueen(where);
+		case 4:
+			return objects::makeSpiderSoldier(where);
+		}
 	}
 }

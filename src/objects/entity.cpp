@@ -69,4 +69,52 @@ namespace objects
 			attributes::grunt
 		};
 	}
+
+	Entity makeSpiderGrunt(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'*',
+			4,
+			"spider grunt",
+			brain::randMover,
+			attributes::grunt
+		};
+	}
+
+	Entity makeSpiderWorker(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'*',
+			4,
+			"spider worker",
+			brain::randMover,
+			attributes::worker
+		};
+	}
+
+	Entity makeSpiderQueen(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'*',
+			4,
+			"spider queen",
+			brain::blindSniffer,
+			attributes::queen
+		};
+	}
+
+	Entity makeSpiderSoldier(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'*',
+			4,
+			"spider soldier",
+			brain::blindSniffer,
+			attributes::soldier
+		};
+	}
 }
