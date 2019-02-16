@@ -124,6 +124,9 @@ namespace state
 			damage *= 2;
 		}
 		damage -= (d.physical * attackee->constitution) + (d.magicka * attackee->magicka);
+		for (const auto &i : attackee->armor) {
+			damage -= (d.physical * i.constitution) + (d.magicka * i.magicka);
+		}
 		if (damage <= 0) {
 			damage = 1;
 		}

@@ -2,6 +2,7 @@
 
 #include "fight.h"
 #include "levelUp.h"
+#include "inventory.h"
 
 namespace state
 {
@@ -19,10 +20,11 @@ namespace state
 			// player killed monster
 			mLevel->killEntity(mFightingMonster);
 			mFightingMonster = -1;
-			if (mPlayerStats.exp > mPlayerStats.level * mPlayerStats.level || true) {
+			if (mPlayerStats.exp > mPlayerStats.level * mPlayerStats.level) {
 				mPlayerStats.level++;
 				mPlayerStats.exp = 0;
 				mNextState = new LevelUp(&mPlayerStats);
+				return;
 			}
 		}
 		if (mRecvMsgUp == 2) {
@@ -61,6 +63,9 @@ namespace state
 		switch (ctx->input) {
 		case Input::ESCAPE:
 			mShouldClose = true;
+			return;
+		case Input::SELECT:
+			mNextState = new Inventory(&mPlayerStats);
 			return;
 		default:
 			break;

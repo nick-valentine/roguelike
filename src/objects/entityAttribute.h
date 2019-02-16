@@ -14,6 +14,8 @@ namespace objects
 		EntityAttribute() = default;
 		EntityAttribute(int health, int strength, int constitution, int dexterity, int agility, int magicka);
 		void award(Item i);
+		void equip(uint i);
+		void dequip(uint i);
 		void levelUp(uint count);
 		int level = 1;
 		int health = 0;

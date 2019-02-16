@@ -47,11 +47,23 @@ namespace objects
 			weapons.push_back(i);
 			return;
 		}
-		if (i.armor) {
-			armor.push_back(i);
-			return;
-		}
 		inventory.push_back(i);
+	}
+
+	void EntityAttribute::equip(uint i)
+	{
+		if (inventory[i].armor) {
+			armor.push_back(inventory[i]);
+			inventory[i] = inventory[inventory.size() - 1];
+			inventory.pop_back();
+		}
+	}
+
+	void EntityAttribute::dequip(uint i)
+	{
+		inventory.push_back(armor[i]);
+		armor[i] = armor[armor.size() - 1];
+		armor.pop_back();
 	}
 
 	namespace attributes {
@@ -66,6 +78,7 @@ namespace objects
 				5
 			};
 			e.weapons.push_back(objects::items::swordWood());
+			e.armor.push_back(objects::items::helmetWood());
 			return e;
 		}
 

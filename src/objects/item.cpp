@@ -27,7 +27,14 @@ namespace objects
 			if (level > 5) {
 				return swordBronze();
 			}
-			return swordWood();
+			std::uniform_int_distribution<int> loot(0, 1);
+			switch (loot(mt)) {
+			case 0:
+				return swordWood();
+			case 1:
+				return helmetWood();
+			}
+			
 		}
 
 		Item swordWood()
@@ -63,6 +70,15 @@ namespace objects
 				"bronze sword",
 				true, false,
 				1, 1, 3, 0, 8
+			};
+		}
+
+		Item helmetWood()
+		{
+			return Item{
+				"wooden helmet",
+				false, true,
+				1, 3, 1, 0, 0
 			};
 		}
 	}

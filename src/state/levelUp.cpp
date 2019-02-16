@@ -2,7 +2,7 @@
 
 namespace state
 {
-	LevelUp::LevelUp(objects::EntityAttribute *playerStats) : mPlayerStats(playerStats)
+	LevelUp::LevelUp(objects::EntityAttribute *playerStats) : Abstract(), mPlayerStats(playerStats)
 	{
 		std::vector<std::string> options;
 		options.push_back("health");
