@@ -6,11 +6,12 @@
 #include "hallway.h"
 #include "player.h"
 #include "enemies.h"
+#include "exit.h"
 
 namespace levelPass
 {
 	using ptr = std::unique_ptr<Abstract>;
 
-	std::vector<ptr> defaultPasses();
+	std::vector<ptr> defaultPasses(int level);
 }
 #endif // LEVELPASS_H

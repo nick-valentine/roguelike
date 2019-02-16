@@ -77,9 +77,8 @@ namespace objects
 		return &mEntities[i];
 	}
 
-	void Level::bumpPlayer()
+	void Level::bumpPlayer(int distance)
 	{
-		constexpr int distance = 20;
 		auto pos = mEntities[mPlayer].pos();
 		if (pos.x < distance + 1) {
 			pos.x = distance + 1;

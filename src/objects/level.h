@@ -33,7 +33,7 @@ namespace objects
 		void addRoom(iPoint p);
 		void addEntity(Entity e);
 		const Entity *getEntity(int i) const;
-		void bumpPlayer();
+		void bumpPlayer(int distance);
 		void killEntity(int i);
 		void setPlayer(Entity e);
 		const Entity *getPlayer() const;

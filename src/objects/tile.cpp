@@ -2,9 +2,11 @@
 
 namespace objects
 {
-	const std::array<TileType, 2> Tile::Tiles = {
+	const std::array<TileType, (int)TileName::Count> Tile::Tiles = {
 		TileType('#', 1, true),
-		TileType(' ', 1, false)
+		TileType(' ', 1, false),
+		TileType('D', 2, false),
+		TileType('U', 2, false)
 	};
 
 	Tile::Tile(TileName type) : mType((int)type)
@@ -24,6 +26,11 @@ namespace objects
 	const TileType Tile::describe() const
 	{
 		return Tile::Tiles[mType];
+	}
+
+	TileName Tile::name() const
+	{
+		return TileName(mType);
 	}
 
 	const TileType Tile::getType(uint i)

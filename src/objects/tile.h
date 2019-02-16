@@ -24,6 +24,8 @@ namespace objects
 	{
 		Wall = 0,
 		Empty,
+		DownStairs,
+		UpStairs,
 		Count
 	};
 
@@ -34,10 +36,11 @@ namespace objects
 
 		void drawAt(window::ptr &win, iPoint pos);
 		const TileType describe() const;
+		TileName name() const;
 
 		static const TileType getType(uint i);
 	private:
-		static const std::array<TileType, 2> Tiles;
+		static const std::array<TileType, (int)TileName::Count> Tiles;
 
 		int mType = 0;
 	};

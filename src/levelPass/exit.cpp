@@ -1,11 +1,11 @@
-#include "player.h"
+#include "exit.h"
 
 #include <random>
 #include "../objects/entity.h"
 
 namespace levelPass
 {
-	void Player::execute(objects::Level &l)
+	void Exit::execute(objects::Level &l)
 	{
 		while (true) {
 			auto size = l.size();
@@ -19,17 +19,11 @@ namespace levelPass
 			int x = maxX(mt);
 			int y = maxY(mt);
 
-			bool playerSet = false;
 			for (int i = x; i < size.x; i++) {
 				for (int j = y; j < size.y; j++) {
 					if (!l.get(iPoint(i,j)).describe().collidable) {
-						if (!playerSet) {
-							l.setPlayer(objects::makePlayer(iPoint(i,j)));
-							playerSet = true;
-						} else {
-							l.set(iPoint(i,j), objects::Tile(objects::TileName::UpStairs));
-							return;	
-						}
+						l.set(iPoint(i,j), objects::Tile(objects::TileName::DownStairs));
+						return;
 					}
 				}
 			}

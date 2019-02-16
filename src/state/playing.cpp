@@ -3,12 +3,12 @@
 #include "fight.h"
 #include "levelUp.h"
 #include "inventory.h"
+#include "../objects/tile.h"
 
 namespace state
 {
 	Playing::Playing() : Abstract(), mCamera(iPoint(0, 0))
 	{
-		mLevelPasses = levelPass::defaultPasses();
 		this->generateLevel();
 		mPlayerStats = objects::attributes::basePlayer(1);
 		mLog->info("hello world!");
@@ -18,7 +18,7 @@ namespace state
 	{
 		if (mRecvMsgUp == 1) {
 			// player killed monster
-			mLevel->killEntity(mFightingMonster);
+			mLevel.top()->killEntity(mFightingMonster);
 			mFightingMonster = -1;
 			if (mPlayerStats.exp > mPlayerStats.level * mPlayerStats.level) {
 				mPlayerStats.level++;
@@ -32,20 +32,32 @@ namespace state
 			return;
 		} else if (mRecvMsgUp == 3) {
 			// player ran
-			mLevel->bumpPlayer();
+			mLevel.top()->bumpPlayer(20);
 			mFightingMonster = -1;
 		}
 		mRecvMsgUp = 0;
 
-		mLevel->update(ctx);
-		auto player = mLevel->getPlayer();
-		mCamera.moveTo(player->pos());
+		mLevel.top()->update(ctx);
+		auto player = mLevel.top()->getPlayer();
+		auto pos = player->pos();
+		mCamera.moveTo(pos);
 
-		auto c = mLevel->checkCollision();
+		if (mLevel.top()->get(pos).name() == objects::TileName::UpStairs) {
+			if (mLevel.size() > 1) {
+				mLevel.pop();
+				mLevel.top()->bumpPlayer(1);
+				return;	
+			}
+			mLog->info("leaving so soon?");
+		} else if (mLevel.top()->get(pos).name() == objects::TileName::DownStairs) {
+			this->generateLevel();
+		}
+
+		auto c = mLevel.top()->checkCollision();
 		if (c.first != -1) {
-			auto first = mLevel->getEntity(c.first);
-			auto second = mLevel->getEntity(c.second);
-			auto player = mLevel->getPlayer();
+			auto first = mLevel.top()->getEntity(c.first);
+			auto second = mLevel.top()->getEntity(c.second);
+			auto player = mLevel.top()->getPlayer();
 			const objects::Entity* notPlayer = nullptr;
 			if (first == player || second == player) {
 				if (first != player) {
@@ -76,15 +88,16 @@ namespace state
 
 	void Playing::render(window::ptr &win)
 	{
-		mCamera.render(win, mLevel);
+		mCamera.render(win, mLevel.top());
 	}
 
 	void Playing::generateLevel()
 	{
-		mLevel = std::make_unique<objects::Level>(iPoint(200, 100));
+		mLevelPasses = levelPass::defaultPasses(mLevel.size() + 1);
+		mLevel.push(std::make_unique<objects::Level>(iPoint(200 + (mLevel.size() * 10), 100 + (mLevel.size() * 10))));
 
 		for (const auto &i : mLevelPasses) {
-			i->execute(*mLevel);
+			i->execute(*(mLevel.top()));
 		}
 	}
 }
