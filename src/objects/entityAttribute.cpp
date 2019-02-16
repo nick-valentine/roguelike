@@ -41,6 +41,19 @@ namespace objects
 		}
 	}
 
+	void EntityAttribute::award(Item i)
+	{
+		if (i.weapon) {
+			weapons.push_back(i);
+			return;
+		}
+		if (i.armor) {
+			armor.push_back(i);
+			return;
+		}
+		inventory.push_back(i);
+	}
+
 	namespace attributes {
 		EntityAttribute basePlayer(uint level)
 		{

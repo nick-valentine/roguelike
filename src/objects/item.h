@@ -19,7 +19,11 @@ namespace objects
 
 	namespace items
 	{
+		Item loot(int level);
 		Item swordWood();
+		Item swordBronze();
+		Item swordSteel();
+		Item swordMystic();
 	}
 }
 

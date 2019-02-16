@@ -2,6 +2,8 @@
 
 #include <random>
 
+#define LOOT_CHANCE 5
+
 namespace state
 {
 	Fight::Fight(const objects::Entity *player, objects::EntityAttribute *playerStats, const objects::Entity *other) : 
@@ -46,6 +48,16 @@ namespace state
 		if (mOtherStats.health <= 0) {
 			mLog->info("you killed %s", mOther->name.c_str());
 			mPlayerStats->exp += mOtherStats.level * 5;
+			
+			std::random_device rd;
+			std::mt19937 mt(rd());
+			std::uniform_int_distribution<int> lootChance(0, LOOT_CHANCE);
+			if (lootChance(mt) == 1) {
+				auto i = objects::items::loot(mOtherStats.level);
+				mLog->info("%s dropped a %s", mOther->name.c_str(), i.name.c_str());
+				mPlayerStats->award(i);
+			}
+
 			mMsgDown = 1;
 			mShouldClose = true;
 			return;
