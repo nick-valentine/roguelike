@@ -21,11 +21,11 @@ namespace state
 			mShouldClose = true;
 			return;
 		case 0:
-			mLog->info("throwing away %s", mName.c_str());
+			remove();
+			mShouldClose = true;
 			break;
 		case 1:
-			mLog->info("using %s", mName.c_str());
-			use();
+			mShouldClose = use();
 			break;
 		case 2:
 			mShouldClose = true;
@@ -76,29 +76,61 @@ namespace state
 		return -1;
 	}
 
-	void InventoryItem::use()
+	bool InventoryItem::use()
 	{
 		auto id = locateWeapon();
 		if (id != -1) {
 			mLog->info("you wave the %s through the air!", mPlayerStats->weapons[id].name.c_str());
-			return;
+			return false;
 		}
 
 		id = locateArmor();
 		if (id != -1) {
 			mLog->info("you take off the %s", mPlayerStats->armor[id].name.c_str());
 			mPlayerStats->dequip(id);
+			return true;
+		}
+
+		id = locateInventory();
+		if (id != -1) {
+			if (mPlayerStats->inventory[id].armor) {
+				mLog->info("you put on the %s", mPlayerStats->inventory[id].name.c_str());
+				mPlayerStats->equip(id);
+				return true;
+			} else if(mPlayerStats->inventory[id].useable) {
+				mLog->info("you use the %s", mPlayerStats->inventory[id].name.c_str());
+				auto usedUp = mPlayerStats->inventory[id].use(mPlayerStats);
+				if (usedUp) {
+					mPlayerStats->inventory[id] = mPlayerStats->inventory[mPlayerStats->inventory.size() - 1];
+					mPlayerStats->inventory.pop_back();
+				}
+				return usedUp;
+			}
+		}
+	}
+
+	void InventoryItem::remove()
+	{
+		mLog->info("you throw away the %s", mName.c_str());
+		auto id = locateWeapon();
+		if (id != -1) {
+			mPlayerStats->weapons[id] = mPlayerStats->weapons[mPlayerStats->weapons.size() - 1];
+			mPlayerStats->weapons.pop_back();
+			return;
+		}
+
+		id = locateArmor();
+		if (id != -1) {
+			mPlayerStats->armor[id] = mPlayerStats->armor[mPlayerStats->armor.size() - 1];
+			mPlayerStats->armor.pop_back();
 			return;
 		}
 
 		id = locateInventory();
 		if (id != -1) {
-			mLog->info("it looks like an armor");
-			if (mPlayerStats->inventory[id].armor) {
-				mLog->info("you put on the %s", mPlayerStats->inventory[id].name.c_str());
-				mPlayerStats->equip(id);
-				return;
-			}
+			mPlayerStats->inventory[id] = mPlayerStats->inventory[mPlayerStats->inventory.size() - 1];
+			mPlayerStats->inventory.pop_back();
+			return;
 		}
 	}
 }

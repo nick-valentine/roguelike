@@ -1,12 +1,19 @@
 #include "item.h"
+#include "entityAttribute.h"
+#include "itemFuncs.h"
 
 #include <random>
 
 namespace objects
 {
-	Item::Item(std::string name, bool weapon, bool armor, int strength, int constitution, int dexterity, int agility, int magicka) :
-	Attribute(strength, constitution, dexterity, agility, magicka), name(name), weapon(weapon), armor(armor)
+	Item::Item(std::string name, bool weapon, bool armor, bool useable, int strength, int constitution, int dexterity, int agility, int magicka) :
+	Attribute(strength, constitution, dexterity, agility, magicka), name(name), weapon(weapon), armor(armor), useable(useable)
 	{}
+
+	bool Item::use(EntityAttribute *e)
+	{
+		mUse(this, e);
+	}
 
 	namespace items
 	{
@@ -41,7 +48,7 @@ namespace objects
 		{
 			return Item{
 				"wooden sword",
-				true, false,
+				true, false, false,
 				3, 1, 1, 1, 0
 			};
 		}
@@ -50,7 +57,7 @@ namespace objects
 		{
 			return Item{
 				"bronze sword",
-				true, false,
+				true, false, false,
 				5, 1, 2, 1, 0
 			};
 		}
@@ -59,7 +66,7 @@ namespace objects
 		{
 			return Item{
 				"bronze sword",
-				true, false,
+				true, false, false,
 				8, 1, 3, 0, 0
 			};
 		}
@@ -68,7 +75,7 @@ namespace objects
 		{
 			return Item{
 				"bronze sword",
-				true, false,
+				true, false, false,
 				1, 1, 3, 0, 8
 			};
 		}
@@ -77,9 +84,23 @@ namespace objects
 		{
 			return Item{
 				"wooden helmet",
-				false, true,
+				false, true, false,
 				1, 3, 1, 0, 0
 			};
 		}
+
+		Item smallHealthPotion()
+		{
+			Item i{
+				"health potion",
+				false, false, true,
+				0, 0, 0, 0, 0
+			};
+			i.memory = 2;
+			i.mUse = objects::heal<5>;
+			return i;
+		}
+
+
 	}
 }

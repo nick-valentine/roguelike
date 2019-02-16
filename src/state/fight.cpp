@@ -105,7 +105,6 @@ namespace state
 		d.physical = true;
 		if (weapon != 0) {
 			weapon-=1;
-			mLog->info("attacking with %s", attacker->weapons[weapon].name.c_str());
 			d.magicka = false;
 			d.physical = false;
 			int str = attacker->weapons[weapon].strength;

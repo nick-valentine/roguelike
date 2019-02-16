@@ -20,7 +20,8 @@ namespace state
 		int locateArmor();
 		int locateWeapon();
 		int locateInventory();
-		void use();
+		bool use();
+		void remove();
 		component::Menu mMenu;
 		objects::EntityAttribute *mPlayerStats;
 		std::string mName;

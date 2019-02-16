@@ -44,7 +44,6 @@ namespace state
 			auto second = mLevel->getEntity(c.second);
 			auto player = mLevel->getPlayer();
 			const objects::Entity* notPlayer = nullptr;
-			mLog->warn("%s ran into a %s!", first->name.c_str(), second->name.c_str());
 			if (first == player || second == player) {
 				if (first != player) {
 					notPlayer = first;

@@ -79,6 +79,7 @@ namespace objects
 			};
 			e.weapons.push_back(objects::items::swordWood());
 			e.armor.push_back(objects::items::helmetWood());
+			e.inventory.push_back(objects::items::smallHealthPotion());
 			return e;
 		}
 

@@ -6,6 +6,14 @@ namespace state
 {
 	void Inventory::update(Context *ctx)
 	{
+		switch (ctx->input) {
+		case Input::ESCAPE:
+			mShouldClose = true;
+			return;
+		default:
+			break;
+		}
+		
 		int result = mMenu.update(ctx);
 		switch (result) {
 		case -1:
