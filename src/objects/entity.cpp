@@ -16,6 +16,11 @@ namespace objects
 		mPos.y += by.y;
 	}
 
+	void Entity::moveTo(iPoint to)
+	{
+		mPos = to;
+	}
+
 	iPoint Entity::pos() const
 	{
 		return mPos;

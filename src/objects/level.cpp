@@ -77,6 +77,32 @@ namespace objects
 		return &mEntities[i];
 	}
 
+	void Level::bumpPlayer()
+	{
+		constexpr int distance = 20;
+		auto pos = mEntities[mPlayer].pos();
+		if (pos.x < distance + 1) {
+			pos.x = distance + 1;
+		}
+		if (pos.x > (mSize.x - distance) - 1) {
+			pos.x = (mSize.x - distance) - 1;
+		}
+		if (pos.y < distance + 1) {
+			pos.y = distance + 1;
+		}
+		if (pos.y > (mSize.y - distance) - 1) {
+			pos.y = (mSize.y - distance) - 1;
+		}
+		for (int i = pos.x - distance; i < pos.x + distance; ++i) {
+			for (int j = pos.y - distance; j <  pos.y + distance; ++j) {
+				if (!mLand[i][j].describe().collidable) {
+					mEntities[mPlayer].moveTo(iPoint(i, j));
+					return;
+				}
+			}
+		}
+	}
+
 	void Level::setPlayer(Entity e)
 	{
 		mPlayer = mEntities.size();

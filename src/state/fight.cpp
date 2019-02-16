@@ -29,8 +29,10 @@ namespace state
 		case -2:
 			break;
 		case 0:
-			mLog->info("you attempt to run");
-			reportTurn();
+			if (doTurn(-1)) {
+				mMsgDown = 3;
+				mShouldClose = true;
+			}
 			break;
 		default:
 			doTurn(result);
@@ -77,19 +79,30 @@ namespace state
 		mActionMenu.render(win);
 	}
 
-	void Fight::doTurn(int weapon)
+	bool Fight::doTurn(int weapon)
 	{
-		mLog->info("you attack with %s", mOptions[weapon].c_str());
-		attack(mOther->name, weapon, mPlayerStats, &mOtherStats);
-
 		std::random_device rd;
 		std::mt19937 mt(rd());
+
+		if (weapon == -1) {
+			std::uniform_int_distribution<int> dist(0, mOtherStats.agility);
+			mLog->info("you attempt to run away");
+			if (mPlayerStats->agility > dist(mt)) {
+				mLog->info("you succeed at running");
+				return true;
+			}
+			mLog->info("and fail!");
+		} else {
+			mLog->info("you attack with %s", mOptions[weapon].c_str());
+			attack(mOther->name, weapon, mPlayerStats, &mOtherStats);
+		}
 
 		std::uniform_int_distribution<int> dist(0, mOtherStats.weapons.size() - 1);
 		int enemyWeapon = dist(mt);
 		mLog->info("%s attacks with %s", mOther->name.c_str(), mOtherStats.weapons[enemyWeapon].name.c_str());
 		attack(mPlayer->name, enemyWeapon, &mOtherStats, mPlayerStats);
 		reportTurn();
+		return false;
 	}
 
 	void Fight::attack(std::string attackeeName, int weapon, objects::EntityAttribute *attacker, objects::EntityAttribute *attackee)

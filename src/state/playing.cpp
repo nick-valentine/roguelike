@@ -26,11 +26,14 @@ namespace state
 				mNextState = new LevelUp(&mPlayerStats);
 				return;
 			}
-		}
-		if (mRecvMsgUp == 2) {
+		} else if (mRecvMsgUp == 2) {
 			// player died
 			mShouldClose = true;
 			return;
+		} else if (mRecvMsgUp == 3) {
+			// player ran
+			mLevel->bumpPlayer();
+			mFightingMonster = -1;
 		}
 		mRecvMsgUp = 0;
 

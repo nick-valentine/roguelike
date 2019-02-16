@@ -21,7 +21,7 @@ namespace state
 		void update(Context *ctx);
 		void render(window::ptr &win);
 	private:
-		void doTurn(int weapon);
+		bool doTurn(int weapon);
 		void attack(std::string attackeeName, int weapon, objects::EntityAttribute *attacker, objects::EntityAttribute *attackee);
 		void reportTurn();
 		void reportEnemy();

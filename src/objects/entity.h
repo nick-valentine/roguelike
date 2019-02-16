@@ -22,6 +22,7 @@ namespace objects
 		Entity(iPoint pos, char rep, int color, std::string name, UpdateFunc func, AttrFunc aFunc);
 
 		void move(iPoint by);
+		void moveTo(iPoint to);
 		iPoint pos() const;
 
 		void drawAt(window::ptr &win, iPoint pos) const;
