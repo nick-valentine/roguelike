@@ -47,6 +47,20 @@ namespace objects
 	Entity makeSpiderWorker(iPoint pos);
 	Entity makeSpiderQueen(iPoint pos);
 	Entity makeSpiderSoldier(iPoint pos);
+
+	// goblins
+	Entity makeGoblinGrunt(iPoint pos);
+	Entity makeGoblinWorker(iPoint pos);
+	Entity makeHobgoblin(iPoint pos);
+
+	// orcs
+	Entity makeOrcSoldier(iPoint pos);
+	Entity makeOrcScout(iPoint pos);
+
+	// skeletons
+	Entity makeSkeletonWonderer(iPoint pos);
+	Entity makeZombie(iPoint pos);
+	Entity makeZombieJuggernaut(iPoint pos);
 }
 
 #endif // OBJECTS_ENTITY_H

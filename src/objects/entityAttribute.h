@@ -33,6 +33,11 @@ namespace objects
 		EntityAttribute worker(uint level);
 		EntityAttribute soldier(uint level);
 		EntityAttribute queen(uint level);
+		EntityAttribute scout(uint level);
+		EntityAttribute juggernaut(uint level);
+
+		EntityAttribute zombie(uint level);
+		EntityAttribute zombieJuggernaut(uint level);
 	}
 }
 

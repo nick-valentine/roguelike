@@ -64,7 +64,7 @@ namespace objects
 			pos,
 			'G',
 			3,
-			"grunt",
+			"goblin grunt",
 			brain::randMover,
 			attributes::grunt
 		};
@@ -115,6 +115,103 @@ namespace objects
 			"spider soldier",
 			brain::blindSniffer,
 			attributes::soldier
+		};
+	}
+
+
+	Entity makeGoblinGrunt(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'G',
+			3,
+			"gobln grunt",
+			brain::randMover,
+			attributes::grunt
+		};
+	}
+
+	Entity makeGoblinWorker(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'G',
+			3,
+			"gobln grunt",
+			brain::randMover,
+			attributes::worker
+		};
+	}
+
+	Entity makeHobgoblin(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'G',
+			3,
+			"hobgoblin",
+			brain::blindSniffer,
+			attributes::soldier
+		};
+	}
+
+	Entity makeOrcSoldier(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'O',
+			3,
+			"orc soldier",
+			brain::blindSniffer,
+			attributes::soldier
+		};
+	}
+
+	Entity makeOrcScout(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'O',
+			3,
+			"orc scout",
+			brain::blindSnifferFast,
+			attributes::scout
+		};
+	}
+
+	Entity makeSkeletonWonderer(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'k',
+			3,
+			"skeleton",
+			brain::randMover,
+			attributes::zombie
+		};
+	}
+
+	Entity makeZombie(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'k',
+			3,
+			"zombie",
+			brain::blindSniffer,
+			attributes::zombie
+		};
+	}
+
+	Entity makeZombieJuggernaut(iPoint pos)
+	{
+		return Entity{
+			pos,
+			'K',
+			3,
+			"zombie juggernaut",
+			brain::blindSniffer,
+			attributes::zombieJuggernaut
 		};
 	}
 }

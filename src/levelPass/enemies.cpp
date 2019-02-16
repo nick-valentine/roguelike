@@ -46,7 +46,7 @@ namespace levelPass
 		std::random_device rd;
 		std::mt19937 mt(rd());
 
-		std::uniform_int_distribution<int> which(0, 5);
+		std::uniform_int_distribution<int> which(0, 13);
 		switch (which(mt)) {
 		case 0:
 			return objects::makeGrunt(where);
@@ -58,6 +58,22 @@ namespace levelPass
 			return objects::makeSpiderQueen(where);
 		case 4:
 			return objects::makeSpiderSoldier(where);
+		case 5:
+			return objects::makeGoblinGrunt(where);
+		case 6:
+			return objects::makeGoblinWorker(where);
+		case 7:
+			return objects::makeHobgoblin(where);
+		case 8:
+			return objects::makeOrcSoldier(where);
+		case 9:
+			return objects::makeOrcScout(where);
+		case 10:
+			return objects::makeSkeletonWonderer(where);
+		case 11:
+			return objects::makeZombie(where);
+		case 12:
+			return objects::makeZombieJuggernaut(where);
 		}
 	}
 }

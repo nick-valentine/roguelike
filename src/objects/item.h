@@ -35,16 +35,39 @@ namespace objects
 		Item swordSteel();
 		Item swordMystic();
 
+		// wands
+		Item wandBasic();
+		Item wandMajestic();
+
+		// daggers
+		Item daggerWood();
+		Item daggerBronze();
+		Item daggerSteel();
+		Item daggerMystic();
+
 		// misc
 		Item picaxe();
+		Item club();
+		Item bucket();
 
 		// armors
 		Item helmetWood();
+		Item tunicCloth();
 		Item tunicLeather();
 		Item tunicIron();
 
-		//potions
+		// potions
 		Item smallHealthPotion();
+		Item mediumHealthPotion();
+		Item bigHealthPotion();
+		Item potionBlue();
+		Item potionGreen();
+		Item potionYellow();
+		Item potionBlack();
+		Item potionPurple();
+
+		// misc
+		Item bite();
 	}
 }
 

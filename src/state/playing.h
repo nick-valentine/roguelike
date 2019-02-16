@@ -7,6 +7,7 @@
 #include "../levelPass/levelPass.h"
 #include "../objects/level.h"
 #include "../objects/entityAttribute.h"
+#include "../objects/itemFuncs.h"
 #include "../objects/item.h"
 #include "../camera.h"
 

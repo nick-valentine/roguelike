@@ -87,6 +87,36 @@ namespace objects::brain {
 		if (mem.b.moveModulo != 0) {
 			return;
 		}
+
+		auto p = l.getPlayer()->pos();
+		auto pos = e->pos();
+		iPoint delta{0, 0};
+		if (p.x > pos.x) {
+			delta.x = 1;
+		} else if (p.x < pos.x) {
+			delta.x = -1;
+		} else if (p.y > pos.y)  {
+			delta.y = 1;
+		} else if (p.y < pos.y) {
+			delta.y = -1;
+		}
+
+		iPoint to{pos.x + delta.x, pos.y + delta.y};
+		if (helper::canMove(to, l)) {
+			e->move(delta);
+		}
+	}
+
+	void blindSnifferFast(objects::Entity *e, Context *ctx, const objects::Level &l)
+	{
+		helper::randMoverMemory mem;
+		mem.i = e->memory;
+		mem.b.moveModulo++;
+		mem.b.moveModulo%=4;
+		e->memory = mem.i;
+		if (mem.b.moveModulo != 0) {
+			return;
+		}
 		
 		auto p = l.getPlayer()->pos();
 		auto pos = e->pos();

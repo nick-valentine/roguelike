@@ -11,7 +11,8 @@ namespace state
 	{
 		this->generateLevel();
 		mPlayerStats = objects::attributes::basePlayer(1);
-		mLog->info("hello world!");
+		
+		objects::createMapping();
 	}
 
 	void Playing::update(Context *ctx)

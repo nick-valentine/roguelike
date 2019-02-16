@@ -7,5 +7,6 @@ SET (SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/attribute.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/entityAttribute.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/item.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/itemFuncs.cpp
 	PARENT_SCOPE
 )

@@ -99,7 +99,16 @@ namespace state
 				return true;
 			} else if(mPlayerStats->inventory[id].useable) {
 				mLog->info("you use the %s", mPlayerStats->inventory[id].name.c_str());
+				auto oldHealth = mPlayerStats->health;
 				auto usedUp = mPlayerStats->inventory[id].use(mPlayerStats);
+				auto newHealth = mPlayerStats->health;
+				if (newHealth > oldHealth) {
+					mLog->info("you feel better than before");
+				} else if (newHealth < oldHealth) {
+					mLog->info("you feel worse than before");
+				} else {
+					mLog->info("you feel no noticeable changes");
+				}
 				if (usedUp) {
 					mPlayerStats->inventory[id] = mPlayerStats->inventory[mPlayerStats->inventory.size() - 1];
 					mPlayerStats->inventory.pop_back();

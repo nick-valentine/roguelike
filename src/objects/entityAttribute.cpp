@@ -121,8 +121,8 @@ namespace objects
 				20,
 				7,
 				7,
-				4,
-				4,
+				6,
+				6,
 				0
 			};
 
@@ -145,6 +145,75 @@ namespace objects
 
 			e.armor.push_back(objects::items::tunicIron());
 			e.weapons.push_back(objects::items::swordMystic());
+			e.levelUp(level - 1);
+			return e;
+		}
+
+		EntityAttribute scout(uint level)
+		{
+			EntityAttribute e{
+				8,
+				7,
+				7,
+				9,
+				9,
+				0
+			};
+
+			e.armor.push_back(objects::items::tunicIron());
+			e.weapons.push_back(objects::items::swordSteel());
+			e.levelUp(level - 1);
+			return e;
+		}
+
+		EntityAttribute juggernaut(uint level)
+		{
+			EntityAttribute e{
+				30,
+				7,
+				7,
+				7,
+				7,
+				0
+			};
+
+			e.armor.push_back(objects::items::tunicIron());
+			e.weapons.push_back(objects::items::swordSteel());
+			e.levelUp(level - 1);
+			return e;
+		}
+
+
+		EntityAttribute zombie(uint level)
+		{
+			EntityAttribute e{
+				10,
+				2,
+				2,
+				2,
+				3,
+				0
+			};
+
+			e.armor.push_back(objects::items::tunicIron());
+			e.weapons.push_back(objects::items::bite());
+			e.levelUp(level - 1);
+			return e;
+		}
+
+		EntityAttribute zombieJuggernaut(uint level)
+		{
+			EntityAttribute e{
+				30,
+				7,
+				7,
+				7,
+				7,
+				0
+			};
+
+			e.armor.push_back(objects::items::tunicIron());
+			e.weapons.push_back(objects::items::bite());
 			e.levelUp(level - 1);
 			return e;
 		}

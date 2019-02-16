@@ -1,9 +1,17 @@
 #ifndef OBJECTS_ITEMFUNCS_H
 #define OBJECTS_ITEMFUNCS_H
 
+#include <map>
+#include <vector>
+#include <random>
+
 #include "entityAttribute.h"
 
-namespace objects {
+namespace objects 
+{
+	static std::map<int, bool(*)(Item *i, EntityAttribute *)> mapping;
+	void createMapping();
+
 	template <int N>
 	bool heal(Item *i, EntityAttribute *e)
 	{
@@ -13,6 +21,12 @@ namespace objects {
 		}
 		i->memory--;
 		return i->memory <= 0;
+	}
+
+	template <int N>
+	bool coloredPotion(Item *i, EntityAttribute *e)
+	{
+		return mapping[N](i, e);
 	}
 }
 
