@@ -7,5 +7,6 @@ SET (SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/levelUp.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/inventory.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/inventoryItem.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/gameOver.cpp
 	PARENT_SCOPE
 )

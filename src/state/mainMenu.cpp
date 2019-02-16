@@ -1,6 +1,6 @@
 #include "mainMenu.h"
 
-#include "playing.h"
+#include "gameOver.h"
 
 namespace state
 {
@@ -23,7 +23,7 @@ namespace state
 			mMsgDown = -1;
 			break;
 		case 0:
-			mNextState = new Playing();
+			mNextState = new GameOver();
 			break;
 		case 1:
 			mShouldClose = true;
