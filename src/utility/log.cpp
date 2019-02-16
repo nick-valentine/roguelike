@@ -87,7 +87,7 @@ namespace utility::logger
 	{
 	    char b[256];
 	    vsnprintf(b, 255, fmt, args);
-	    std::string formatted = "[" + Log::levelStrings[(int)level] + "] ";
+	    std::string formatted = "[" + Log::levelStrings[(int)level - 1] + "] ";
 	    formatted += b;
 	    return formatted;
 	}

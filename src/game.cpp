@@ -18,17 +18,15 @@ Game::Game()
 	mLogger = lWin->log();
 	logWin = std::move(lWin);
 
-	mLogger->warn("goodbye");
-
 	mStateStack.push(new state::MainMenu());
 	mStateStack.top()->setLogger(mLogger);
 
 	mPallette.addColor(COLOR_GREEN,  COLOR_BLACK);
-	mPallette.addColor(COLOR_WHITE,  COLOR_BLACK);
+	mPallette.addColor(COLOR_BLUE,   COLOR_BLACK);
 	mPallette.addColor(COLOR_YELLOW, COLOR_BLACK);
 	mPallette.addColor(COLOR_RED,    COLOR_BLACK);
 	mPallette.addColor(COLOR_WHITE,  COLOR_BLACK);
-	mPallette.addColor(COLOR_GREEN,  COLOR_BLACK);
+	mPallette.addColor(COLOR_CYAN,   COLOR_BLACK);
 	mPallette.addColor(COLOR_YELLOW, COLOR_BLACK);
 	mPallette.addColor(COLOR_RED,    COLOR_BLACK);
 }

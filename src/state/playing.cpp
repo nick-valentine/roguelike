@@ -51,6 +51,7 @@ namespace state
 			mLog->info("leaving so soon?");
 		} else if (mLevel.top()->get(pos).name() == objects::TileName::DownStairs) {
 			this->generateLevel();
+			mLog->info("going down into floor %i", mLevel.size());
 		} else if (mLevel.top()->get(pos).name() == objects::TileName::Treasure) {
 			auto i = objects::items::loot(mLevel.size());
 			mLog->info("You found a chest, it contained a %s", i.name.c_str());
