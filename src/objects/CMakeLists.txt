@@ -4,6 +4,8 @@ SET (SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/tile.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/entity.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/entityBrain.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/attribute.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/entityAttribute.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/item.cpp
 	PARENT_SCOPE
 )

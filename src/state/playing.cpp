@@ -1,6 +1,7 @@
 #include "playing.h"
 
 #include "fight.h"
+#include "levelUp.h"
 
 namespace state
 {
@@ -18,6 +19,11 @@ namespace state
 			// player killed monster
 			mLevel->killEntity(mFightingMonster);
 			mFightingMonster = -1;
+			if (mPlayerStats.exp > mPlayerStats.level * mPlayerStats.level || true) {
+				mPlayerStats.level++;
+				mPlayerStats.exp = 0;
+				mNextState = new LevelUp(&mPlayerStats);
+			}
 		}
 		if (mRecvMsgUp == 2) {
 			// player died

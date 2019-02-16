@@ -9,7 +9,7 @@ namespace state
 		std::vector<std::string> options;
 		options.push_back("Play Game");
 		options.push_back("Quit");
-		mMenu = component::Menu("What do?", options, iPoint(10, 10), iPoint(20, 20));
+		mMenu = component::Menu("What do?", options, iPoint(1, 1), iPoint(20, 20));
 	}
 
 	void MainMenu::update(Context *ctx)
@@ -35,6 +35,7 @@ namespace state
 
 	void MainMenu::render(window::ptr &win)
 	{
+		mMenu.setDims(iPoint(1, 1), win->size());
 		mMenu.render(win);
 	}
 }

@@ -1,11 +1,14 @@
 #ifndef OBJECTS_ENTITY_ATTRIBUTE_H
 #define OBJECTS_ENTITY_ATTRIBUTE_H
 
-using uint = unsigned int;
+#include <vector>
+
+#include "attribute.h"
+#include "item.h"
 
 namespace objects
 {
-	class EntityAttribute
+	class EntityAttribute : public Attribute
 	{
 	public:
 		EntityAttribute() = default;
@@ -14,11 +17,10 @@ namespace objects
 		int level = 1;
 		int health = 0;
 		int maxHealth = 0;
-		int strength = 0;
-		int constitution = 0;
-		int dexterity = 0;
-		int agility = 0;
-		int magicka = 0;
+		uint exp = 0;
+		std::vector<Item> inventory;
+		std::vector<Item> weapons;
+		std::vector<Item> armor;
 	};
 
 	namespace attributes

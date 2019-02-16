@@ -21,11 +21,13 @@ namespace state
 		void update(Context *ctx);
 		void render(window::ptr &win);
 	private:
+		void doTurn(int weapon);
 		void attack(std::string attackeeName, int weapon, objects::EntityAttribute *attacker, objects::EntityAttribute *attackee);
 		void reportTurn();
 		void reportEnemy();
 		void reportSelf();
 
+		std::vector<std::string> mOptions;
 		component::Menu mActionMenu;
 		const objects::Entity *mPlayer;
 		const objects::Entity *mOther;

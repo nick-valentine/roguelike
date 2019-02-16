@@ -7,10 +7,11 @@ namespace state
 	Fight::Fight(const objects::Entity *player, objects::EntityAttribute *playerStats, const objects::Entity *other) : 
 		Abstract(), mPlayer(player), mPlayerStats(playerStats), mOther(other)
 	{
-		std::vector<std::string> options;
-		options.push_back("Punch");
-		options.push_back("Run");
-		mActionMenu = component::Menu("What do?", options, iPoint(1, 1), iPoint(40, 40));
+		mOptions.push_back("Run");
+		for (const auto &i : mPlayerStats->weapons) {
+			mOptions.push_back(i.name);
+		}
+		mActionMenu = component::Menu("What do?", mOptions, iPoint(1, 1), iPoint(40, 40));
 
 		mOtherStats = other->genAttributes(mPlayerStats->level);
 
@@ -26,15 +27,11 @@ namespace state
 		case -2:
 			break;
 		case 0:
-			mLog->info("you punched");
-			attack(mOther->name, 0, mPlayerStats, &mOtherStats);
-			reportTurn();
-			break;
-		case 1:
-			mLog->info("you ran");
+			mLog->info("you attempt to run");
 			reportTurn();
 			break;
 		default:
+			doTurn(result);
 			break;
 		}
 
@@ -48,6 +45,7 @@ namespace state
 
 		if (mOtherStats.health <= 0) {
 			mLog->info("you killed %s", mOther->name.c_str());
+			mPlayerStats->exp += mOtherStats.level * 5;
 			mMsgDown = 1;
 			mShouldClose = true;
 			return;
@@ -67,24 +65,58 @@ namespace state
 		mActionMenu.render(win);
 	}
 
+	void Fight::doTurn(int weapon)
+	{
+		mLog->info("you attack with %s", mOptions[weapon].c_str());
+		attack(mOther->name, weapon, mPlayerStats, &mOtherStats);
+
+		std::random_device rd;
+		std::mt19937 mt(rd());
+
+		std::uniform_int_distribution<int> dist(0, mOtherStats.weapons.size() - 1);
+		int enemyWeapon = dist(mt);
+		mLog->info("%s attacks with %s", mOther->name.c_str(), mOtherStats.weapons[enemyWeapon].name.c_str());
+		attack(mPlayer->name, enemyWeapon, &mOtherStats, mPlayerStats);
+		reportTurn();
+	}
+
 	void Fight::attack(std::string attackeeName, int weapon, objects::EntityAttribute *attacker, objects::EntityAttribute *attackee)
 	{
+		std::random_device rd;
+		std::mt19937 mt(rd());
+
+		std::uniform_int_distribution<int> critChance(0, 100);
+
 		int weaponDamage = 1;
+		int dexBonus = 0;
 		damageType d;
 		d.physical = true;
 		if (weapon != 0) {
-			// look into inventory
+			weapon-=1;
+			mLog->info("attacking with %s", attacker->weapons[weapon].name.c_str());
+			d.magicka = false;
+			d.physical = false;
+			int str = attacker->weapons[weapon].strength;
+			int mag = attacker->weapons[weapon].magicka;
+			dexBonus = attacker->weapons[weapon].dexterity;
+			if (str != 0) {
+				d.physical = true;
+			}
+			if (mag != 0) {
+				d.magicka = true;
+			}
+			weaponDamage = str + mag;
 		}
-		int damage = weaponDamage * (attacker->strength * d.physical) * (attacker->magicka * d.magicka);
+		int damage = weaponDamage + (attacker->strength * d.physical) + (attacker->magicka * d.magicka);
+		if (critChance(mt) == 1) {
+			damage *= 2;
+		}
 		damage -= (d.physical * attackee->constitution) + (d.magicka * attackee->magicka);
 		if (damage <= 0) {
 			damage = 1;
 		}
 
-		std::random_device rd;
-		std::mt19937 mt(rd());
-
-		std::uniform_int_distribution<int> dist(0, attacker->dexterity);
+		std::uniform_int_distribution<int> dist(0, attacker->dexterity + dexBonus);
 
 		if (dist(mt) < attackee->agility) {
 			mLog->info("%s dodged the attack", attackeeName.c_str());
